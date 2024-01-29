@@ -5,9 +5,12 @@ Este projeto foi desenvolvido como parte do trabalho final da disciplina de Pers
 Certifique-se de ter o Docker instalado
 
 ## Como Rodar a Aplicação
-Para rodar a aplicação localmente, siga estas etapas:
+Para rodar a aplicação com o Docker, siga as etapas abaixo:
+
 ```git clone https://github.com/gabriel-pcr/vacinacao-persistencia.git```
+
 ```cd vacinacao```
+
 ```docker-compose up --build```
 
 ## Autores:
