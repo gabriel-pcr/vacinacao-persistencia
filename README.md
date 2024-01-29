@@ -15,4 +15,5 @@ Para rodar a aplicação com o Docker, siga as etapas abaixo:
 
 ## Autores:
 Gabriel Pires de Campos Rezende (Matrícula: 202004752)
+
 Giancarlo Moraes de Sousa (Matrícula: 202004753)
