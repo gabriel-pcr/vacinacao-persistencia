@@ -1,0 +1,26 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Detalhes da Agenda</h1>
+    <dl class="row">
+        <dt class="col-sm-3">ID:</dt>
+        <dd class="col-sm-9">{{ agenda.id }}</dd>
+        <dt class="col-sm-3">Data:</dt>
+        <dd class="col-sm-9">{{ agenda.data }}</dd>
+        <dt class="col-sm-3">Hora:</dt>
+        <dd class="col-sm-9">{{ agenda.hora }}</dd>
+        <dt class="col-sm-3">Situação:</dt>
+        <dd class="col-sm-9">{{ agenda.get_situacao_display }}</dd>
+        <dt class="col-sm-3">Data Situação:</dt>
+        <dd class="col-sm-9">{{ agenda.data_situacao|default:"-" }}</dd>
+        <dt class="col-sm-3">Observações:</dt>
+        <dd class="col-sm-9">{{ agenda.observacoes }}</dd>
+        <dt class="col-sm-3">Usuário:</dt>
+        <dd class="col-sm-9">{{ agenda.usuario.nome }}</dd>
+        <dt class="col-sm-3">Vacina:</dt>
+        <dd class="col-sm-9">{{ agenda.vacina.titulo }}</dd>
+    </dl>
+    <a href="{% url 'agenda-list' %}" class="btn btn-secondary">Voltar para a listagem</a>
+</div>
+{% endblock %}

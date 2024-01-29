@@ -1,0 +1,23 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Detalhes da Vacina</h1>
+    <dl class="row">
+        <dt class="col-sm-3">ID:</dt>
+        <dd class="col-sm-9">{{ vacina.id }}</dd>
+        <dt class="col-sm-3">Título:</dt>
+        <dd class="col-sm-9">{{ vacina.titulo }}</dd>
+        <dt class="col-sm-3">Descrição:</dt>
+        <dd class="col-sm-9">{{ vacina.descricao }}</dd>
+        <dt class="col-sm-3">Doses:</dt>
+        <dd class="col-sm-9">{{ vacina.doses }}</dd>
+        <dt class="col-sm-3">Periodicidade:</dt>
+        <dd class="col-sm-9">{{ vacina.get_periodicidade_display }}</dd>
+        <dt class="col-sm-3">Intervalo:</dt>
+        <dd class="col-sm-9">{{ vacina.intervalo }}</dd>
+
+    </dl>
+    <a href="{% url 'vacina-list' %}" class="btn btn-secondary">Voltar para a listagem</a>
+</div>
+{% endblock %}

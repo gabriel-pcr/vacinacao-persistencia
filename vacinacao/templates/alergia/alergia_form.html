@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>{% if alergia.id %}Editar Alergia{% else %}Criar Alergia{% endif %}</h1>
+
+    <form method="post" action="{% if alergia.id %}{% url 'alergia-update' alergia.id %}{% else %}{% url 'alergia-create' %}{% endif %}">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="id_nome">Name:</label>
+            <input type="text" class="form-control" id="id_nome" name="nome" maxlength="40" required
+                   value="{{ alergia.nome }}">
+        </div>
+
+        <div class="text-end mt-3">
+            <a href="{% url 'alergia-list' %}" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

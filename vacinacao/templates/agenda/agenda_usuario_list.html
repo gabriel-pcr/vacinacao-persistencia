@@ -1,0 +1,52 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Lista de Agendas do Usuário: {{ usuario.nome}}</h1>
+
+    <a href="{% url 'usuario-list' %}" class="btn btn-primary">Voltar</a>
+
+    <div class="text-end">
+        <div class="btn-group mb-2" role="group">
+            <a href="{% url 'agenda-usuario' usuario.id %}" class="btn btn-secondary">Todas</a>
+            <a href="{% url 'agenda-usuario' usuario.id %}?status=canceladas" class="btn btn-secondary">Canceladas</a>
+            <a href="{% url 'agenda-usuario' usuario.id %}?status=realizadas" class="btn btn-secondary">Realizadas</a>
+        </div>
+
+        <div class="btn-group mb-2" role="group">
+            <a href="{% url 'agenda-usuario' usuario.id %}?date=hoje" class="btn btn-secondary">Do dia corrente</a>
+        </div>
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Vacina</th>
+            <th>Dose</th>
+            <th>Data</th>
+            <th>Hora</th>
+            <th>Situação</th>
+            <th>Data da Situação</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for agenda in agendas %}
+        <tr>
+            <td>{{ agenda.id }}</td>
+            <td>{{ agenda.vacina.titulo }}</td>
+            <td>{{ agenda.dose_vacina }}</td>
+            <td>{{ agenda.data }}</td>
+            <td>{{ agenda.hora }}</td>
+            <td>{{ agenda.get_situacao_display }}</td>
+            <td>{{ agenda.data_situacao|default:"-" }}</td>
+            <td>
+                <a href="{% url 'agenda-detail' agenda.id %}" class="btn btn-secondary btn-sm">Consultar</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

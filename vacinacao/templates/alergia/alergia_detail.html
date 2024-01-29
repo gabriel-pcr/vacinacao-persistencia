@@ -1,0 +1,14 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Detalhes da Alergia</h1>
+    <dl class="row">
+        <dt class="col-sm-3">ID:</dt>
+        <dd class="col-sm-9">{{ alergia.id }}</dd>
+        <dt class="col-sm-3">Nome:</dt>
+        <dd class="col-sm-9">{{ alergia.nome }}</dd>
+    </dl>
+    <a href="{% url 'alergia-list' %}" class="btn btn-secondary">Voltar para a listagem</a>
+</div>
+{% endblock %}

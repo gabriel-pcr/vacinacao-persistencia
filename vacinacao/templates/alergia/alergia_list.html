@@ -1,0 +1,64 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Lista de Alergias</h1>
+
+    <a href="{% url 'alergia-create' %}" class="btn btn-primary mb-2">Adicionar Alergia</a>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th colspan="3">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for alergia in alergias %}
+        <tr>
+            <td>{{ alergia.id }}</td>
+            <td>{{ alergia.nome }}</td>
+            <td>
+                <a href="{% url 'alergia-detail' alergia.id %}" class="btn btn-secondary btn-sm">Consultar</a>
+            </td>
+            <td>
+                <a href="{% url 'alergia-update' alergia.id %}" class="btn btn-warning btn-sm">Editar</a>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal{{ alergia.id }}">
+                    Remover
+                </button>
+            </td>
+        </tr>
+
+        <!-- Delete Confirmation Modal -->
+        <div class="modal fade" id="deleteModal{{ alergia.id }}" tabindex="-1" role="dialog"
+             aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Confirmar Remoção</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Confirmar remoção de "{{ alergia.nome }}" (ID: {{ alergia.id }})?
+                    </div>
+                    <form method="post" action="{% url 'alergia-delete' alergia.id %}">
+                        {% csrf_token %}
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-danger">Remover</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

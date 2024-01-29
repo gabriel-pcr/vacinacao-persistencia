@@ -1,0 +1,88 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>{% if usuario.id %}Editar Usuário{% else %}Criar Usuário{% endif %}</h1>
+
+    <form method="post"
+          action="{% if usuario.id %}{% url 'usuario-update' usuario.id %}{% else %}{% url 'usuario-create' %}{% endif %}">
+        {% csrf_token %}
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="id_nome">Nome:</label>
+                <input type="text" class="form-control" id="id_nome" name="nome" maxlength="60" required
+                       value="{{ usuario.nome }}">
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="id_data_nascimento">Data de Nascimento:</label>
+                <input type="date" class="form-control" id="id_data_nascimento" name="data_nascimento" required
+                       value="{{ usuario.data_nascimento|date:'Y-m-d' }}">
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="id_sexo">Sexo:</label>
+                <select class="form-control" id="id_sexo" name="sexo" required>
+                    <option value="">Selecione</option>
+                    {% for choice in sexo_choices %}
+                    <option value="{{ choice.0 }}" {% if usuario.sexo == choice.0 %}selected{% endif %}>{{ choice.1 }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="id_uf">UF:</label>
+                <select class="form-control" id="id_uf" name="uf">
+                    <option value="">Selecione</option>
+                    {% for choice in uf_choices %}
+                    <option value="{{ choice.0 }}" {% if usuario.uf == choice.0 %}selected{% endif %}>{{ choice.1 }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="form-group col-md-3">
+                <label for="id_logradouro">Logradouro:</label>
+                <input type="text" class="form-control" id="id_logradouro" name="logradouro" maxlength="60"
+                       value="{{ usuario.logradouro }}">
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="id_cidade">Cidade:</label>
+                <input type="text" class="form-control" id="id_cidade" name="cidade" maxlength="40"
+                       value="{{ usuario.cidade }}">
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="id_setor">Setor:</label>
+                <input type="text" class="form-control" id="id_setor" name="setor" maxlength="40"
+                       value="{{ usuario.setor }}">
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="id_numero">Número:</label>
+                <input type="number" class="form-control" id="id_numero" name="numero" step="1"
+                       value="{{ usuario.numero }}">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="id_alergias">Alergias:</label>
+            <select multiple class="form-control" id="id_alergias" name="alergias">
+                {% for alergia in alergia_choices %}
+                <option value="{{ alergia.id }}"
+                        {% if alergia in usuario.alergias.all %}selected{% endif %}>
+                    {{ alergia.nome }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="text-end mt-3">
+            <a href="{% url 'usuario-list' %}" class="btn btn-secondary">Cancelar</a>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </div>
+    </form>
+</div>
+{% endblock %}

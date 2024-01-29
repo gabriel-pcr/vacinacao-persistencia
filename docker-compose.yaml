@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  web:
+    image: vacinacao:latest
+    container_name: vacinacao-django
+    command: ./entrypoint.sh
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    container_name: vacinacao-postgres
+    environment:
+      POSTGRES_DB: vacinacao
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ComplexPassword123
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

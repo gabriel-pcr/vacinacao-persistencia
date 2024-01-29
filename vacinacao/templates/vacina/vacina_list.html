@@ -1,0 +1,70 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>Lista de Vacinas</h1>
+
+    <a href="{% url 'vacina-create' %}" class="btn btn-primary mb-2">Adicionar Vacina</a>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Título</th>
+            <th>Doses</th>
+            <th>Periodicidade</th>
+            <th>Intervalo</th>
+            <th colspan="3">Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for vacina in vacinas %}
+        <tr>
+            <td>{{ vacina.id }}</td>
+            <td>{{ vacina.titulo }}</td>
+            <td>{{ vacina.doses }}</td>
+            <td>{{ vacina.periodicidade }}</td>
+            <td>{{ vacina.intervalo }}</td>
+            <td>
+                <a href="{% url 'vacina-detail' vacina.id %}" class="btn btn-secondary btn-sm">Consultar</a>
+            </td>
+            <td>
+                <a href="{% url 'vacina-update' vacina.id %}" class="btn btn-warning btn-sm">Editar</a>
+            </td>
+            <td>
+                <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#deleteModal{{ vacina.id }}">
+                    Remover
+                </button>
+            </td>
+        </tr>
+
+        <!-- Delete Confirmation Modal -->
+        <div class="modal fade" id="deleteModal{{ vacina.id }}" tabindex="-1" role="dialog"
+             aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="deleteModalLabel">Confirmar Remoção</h5>
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Confirmar remoção de "{{ vacina.titulo }}" (ID: {{ vacina.id }})?
+                    </div>
+                    <form method="post" action="{% url 'vacina-delete' vacina.id %}">
+                        {% csrf_token %}
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-danger">Remover</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
