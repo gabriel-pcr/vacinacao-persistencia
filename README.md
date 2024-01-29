@@ -13,6 +13,8 @@ Para rodar a aplicação com o Docker, siga as etapas abaixo:
 
 ```docker-compose up --build```
 
+Após as etapas acima, a aplicação estará disponível em http://localhost:8000
+
 ## Autores:
 Gabriel Pires de Campos Rezende (Matrícula: 202004752)
 
