@@ -1,13 +1,10 @@
-import locale
 from datetime import datetime, timedelta
 
-import pytz
-from babel.dates import format_date
 from django.db.models import Value, Case, When, IntegerField
 from django.http import HttpResponseRedirect, HttpResponseNotAllowed
 from django.shortcuts import get_object_or_404, render
-from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, CreateView, UpdateView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, CreateView, DetailView
 
 from vacinacao.models import Agenda, Usuario, Vacina
 from vacinacao.forms import AgendaForm
