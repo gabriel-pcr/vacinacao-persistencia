@@ -8,9 +8,11 @@ Certifique-se de ter o Docker instalado
 Para rodar a aplicação com o Docker, siga as etapas abaixo:
 
 Caso o usuário já tenha o postgres instalado, pare a aplicação em questão utilizando o comando abaixo (linux):
+
 ```sudo service postgresql stop```
 
 Ademais:
+
 ```git clone https://github.com/gabriel-pcr/vacinacao-persistencia.git```
 
 ```cd vacinacao```
